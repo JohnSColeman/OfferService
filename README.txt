@@ -10,7 +10,8 @@ solution. The logging has not been completed.
 
 The service accepts and stores "offers", an offer has a description and a price
 along with a currency. These are stored in memory and can be recalled for
-display.
+display. It's assumed that the client will perform the task of presenting the
+data nicely, and locale hasn't been taken into consideration on the server side.
 
 Prerequisites:
 1) Maven 3
