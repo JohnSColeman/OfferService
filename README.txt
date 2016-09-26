@@ -6,7 +6,7 @@ values accurately for financial calculations. The software was built up from uni
 tests that exercise the business rules in the offer service layer.
 
 The JavaDocs and tests are not intended to be comprehensive, this is a skeletal
-solution.
+solution. The logging has not been completed.
 
 The service accepts and stores "offers", an offer has a description and a price
 along with a currency. These are stored in memory and can be recalled for
