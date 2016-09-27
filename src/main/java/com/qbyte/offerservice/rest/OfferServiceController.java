@@ -1,7 +1,7 @@
 package com.qbyte.offerservice.rest;
 
 import com.qbyte.offerservice.services.OfferService;
-import com.qbyte.offerservice.services.OfferServiceException;
+import com.qbyte.offerservice.services.exceptions.OfferServiceException;
 import com.qbyte.offerservice.entities.SimpleOffer;
 import com.qbyte.offerservice.rest.dto.SimpleOfferDTO;
 import java.math.BigDecimal;

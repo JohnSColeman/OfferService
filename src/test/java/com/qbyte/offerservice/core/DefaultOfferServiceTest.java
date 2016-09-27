@@ -7,7 +7,7 @@ import static com.qbyte.offerservice.TestConstants.VALID_DESCRIPTION;
 import static com.qbyte.offerservice.TestConstants.VALID_PRICE;
 import com.qbyte.offerservice.services.DefaultOfferService;
 import com.qbyte.offerservice.services.OfferService;
-import com.qbyte.offerservice.services.OfferServiceException;
+import com.qbyte.offerservice.services.exceptions.OfferServiceException;
 import java.math.BigDecimal;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import org.junit.Test;

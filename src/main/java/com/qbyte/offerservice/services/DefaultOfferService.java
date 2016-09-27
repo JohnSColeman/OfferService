@@ -1,5 +1,6 @@
 package com.qbyte.offerservice.services;
 
+import com.qbyte.offerservice.services.exceptions.OfferServiceException;
 import com.qbyte.offerservice.entities.SimpleOffer;
 import com.qbyte.offerservice.dao.OfferDAO;
 import java.math.BigDecimal;

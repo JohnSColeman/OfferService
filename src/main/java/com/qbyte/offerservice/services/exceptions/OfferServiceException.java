@@ -1,4 +1,4 @@
-package com.qbyte.offerservice.services;
+package com.qbyte.offerservice.services.exceptions;
 
 /**
  * The exception thrown by the offer service.
