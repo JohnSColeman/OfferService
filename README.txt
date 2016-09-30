@@ -29,3 +29,29 @@ project in your favourite IDE and run it.)
 
 Browse http://localhost:8080/ to view a web page to interact with the service.
 
+Discussion
+I wanted to build an offer class that would provide a real monetary object
+to store the offer price. This could have been my own Price or Money object with a
+BigDecimal amount and a Currency property, however with Java 9 and the Java 
+Money API on the horizon it seemed sensibile to take this approach and have
+all the benefits of a comprehesive money class implementation (future proofing).
+This ensures accurate calculation and the power of a domain specific approach.
+
+The downside of this rich object approach is that Jackson cannot coerce to a
+MonetaryAmount. We could try and build an encoder/decoder however given the
+time available it seemed prudent to simply represent the offer using a simple DTO
+object to transfer between the client and REST service, hence 2 offer classes.
+In addition the core offer class is envisaged to have properties and behaviours
+unrelated to the front end view and it could be desireable to keep these
+separate and secure from any accidental exposure to the public surface.
+
+The above leads to a somewhat fractured solution; 2 Offer classes. The validation
+is also seperate from the simple offer class and in a business layer because at
+some point using JPA or another ORM technology would require no parameter
+construvtors. This is a flexibility/portability approach although we could
+still have a validate/factory or builder method in the simple offer class as well.
+
+
+
+
+
