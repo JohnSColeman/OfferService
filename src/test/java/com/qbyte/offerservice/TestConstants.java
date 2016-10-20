@@ -1,6 +1,7 @@
 package com.qbyte.offerservice;
 
-import com.qbyte.offerservice.rest.dto.SimpleOfferDTO;
+import com.qbyte.offerservice.entities.SimpleOffer;
+
 import java.math.BigDecimal;
 
 /**
@@ -15,9 +16,19 @@ public class TestConstants {
 
     public static final String VALID_CURRENCY_CODE = "EUR";
 
-    public static final SimpleOfferDTO VALID_SIMPLE_OFFER_1
-            = new SimpleOfferDTO(null, VALID_DESCRIPTION, VALID_PRICE, VALID_CURRENCY_CODE);
-    
-    public static final SimpleOfferDTO VALID_SIMPLE_OFFER_2
-            = new SimpleOfferDTO(null, VALID_DESCRIPTION, VALID_PRICE, VALID_CURRENCY_CODE);
+    public static SimpleOffer VALID_SIMPLE_OFFER_1;
+
+    public static SimpleOffer VALID_SIMPLE_OFFER_2;
+
+    static {
+        try {
+            VALID_SIMPLE_OFFER_1
+                    = SimpleOffer.create(VALID_DESCRIPTION, VALID_PRICE, VALID_CURRENCY_CODE);
+
+            VALID_SIMPLE_OFFER_2
+                    = SimpleOffer.create(VALID_DESCRIPTION, VALID_PRICE, VALID_CURRENCY_CODE);
+        } catch (Exception ex) {
+            throw new RuntimeException(ex);
+        }
+    }
 }

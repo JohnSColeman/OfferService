@@ -1,20 +1,19 @@
 package com.qbyte.offerservice.rest;
 
+import com.qbyte.offerservice.entities.SimpleOffer;
 import com.qbyte.offerservice.services.OfferService;
 import com.qbyte.offerservice.services.exceptions.OfferServiceException;
-import com.qbyte.offerservice.entities.SimpleOffer;
-import com.qbyte.offerservice.rest.dto.SimpleOfferDTO;
-import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.Collection;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import java.util.Collection;
+
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
 import static org.springframework.web.bind.annotation.RequestMethod.POST;
-import org.springframework.web.bind.annotation.RestController;
 
 /**
  * This class implements a REST service to manage offers.
@@ -37,11 +36,10 @@ public class OfferServiceController {
     @RequestMapping(method = GET)
     public final ResponseEntity<?> getOffers() {
         try {
-            Collection<SimpleOfferDTO> offers = new ArrayList<>();
-            offerService.getOffers().parallelStream()
-                    .forEach(offer -> offers.add(getSimpleOfferDTO(offer)));
+            Collection<SimpleOffer> offers = offerService.getOffers();
             return ResponseEntity.status(HttpStatus.OK).body(offers);
         } catch (OfferServiceException ex) {
+            ex.printStackTrace();
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
     }
@@ -54,30 +52,14 @@ public class OfferServiceController {
      * @return the offer created
      */
     @RequestMapping(method = POST)
-    public final ResponseEntity<?> createOffer(@RequestBody final SimpleOfferDTO offer) {
+    public final ResponseEntity<?> createOffer(@RequestBody final SimpleOffer offer) {
         try {
-            SimpleOffer createdOffer = offerService
-                    .createSimpleOffer(offer.getDescription(),
-                            offer.getPrice(), offer.getCurrencyCode());
+            SimpleOffer createdOffer = offerService.addSimpleOffer(offer);
             return ResponseEntity.status(HttpStatus.CREATED)
-                    .body(getSimpleOfferDTO(createdOffer));
+                    .body(createdOffer);
         } catch (OfferServiceException ex) {
+            ex.printStackTrace();
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
-    }
-    
-    /**
-     * Convert an offer entity into an offer DTO.
-     *
-     * @param offer the offer to convert into a DTO
-     * @return the offer DTO
-     */
-    private static SimpleOfferDTO getSimpleOfferDTO(final SimpleOffer offer) {
-        SimpleOfferDTO dto = new SimpleOfferDTO();
-        dto.setOfferId(offer.getOfferId());
-        dto.setDescription(offer.getDescription());
-        dto.setPrice(offer.getPrice().getNumber().numberValueExact(BigDecimal.class));
-        dto.setCurrencyCode(offer.getPrice().getCurrency().getCurrencyCode());
-        return dto;
     }
 }

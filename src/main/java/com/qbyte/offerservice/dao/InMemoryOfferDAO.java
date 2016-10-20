@@ -1,12 +1,13 @@
 package com.qbyte.offerservice.dao;
 
 import com.qbyte.offerservice.entities.SimpleOffer;
+import org.springframework.stereotype.Service;
+
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicInteger;
-import org.springframework.stereotype.Service;
 
 /**
  * An in memory persistence provider for storing simple offers using a map.

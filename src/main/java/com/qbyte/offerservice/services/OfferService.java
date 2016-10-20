@@ -1,8 +1,8 @@
 package com.qbyte.offerservice.services;
 
-import com.qbyte.offerservice.services.exceptions.OfferServiceException;
 import com.qbyte.offerservice.entities.SimpleOffer;
-import java.math.BigDecimal;
+import com.qbyte.offerservice.services.exceptions.OfferServiceException;
+
 import java.util.Collection;
 
 /**
@@ -11,16 +11,13 @@ import java.util.Collection;
  */
 public interface OfferService {
     /**
-     * Create a SimpleOffer with the given properties.
+     * Add a SimpleOffer.
      *
-     * @param description a friendly description of the item on offer
-     * @param price the price of the item on offer
-     * @param currencyCode the currency code of the item on offer
-     * @return the Offer with the given properties
+     * @param offer the SimpleOffer to add to the system
+     * @return the Offer as known to the system
      * @throws OfferServiceException when creation of a SimpleOffer fails
      */
-    SimpleOffer createSimpleOffer(String description, Number price,
-            String currencyCode) throws OfferServiceException;
+    SimpleOffer addSimpleOffer(SimpleOffer offer) throws OfferServiceException;
     
     /**
      * Retrieves all the available offers.
